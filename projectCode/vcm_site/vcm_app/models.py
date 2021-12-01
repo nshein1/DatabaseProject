@@ -7,6 +7,13 @@ class Vendor(models.Model):
     #pub_date = models.DateTimeField('date published')
     vendor_email = models.EmailField(max_length=100) #THIS IS A PLACEHOLDER
 
+    #return this vendor's contracts
+    def get_contracts(self):
+        return self.contract_set.all()
+
+    #this be a toString
+    def __str__(self):
+        return self.vendor_name
 
 
 
@@ -18,5 +25,10 @@ class Contract(models.Model):
     """ will need to use FileField
     see https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types
         https://www.geeksforgeeks.org/filefield-django-models/
-        
+
     """
+
+
+#toString
+    def __str__(self):
+        return self.contract_title
