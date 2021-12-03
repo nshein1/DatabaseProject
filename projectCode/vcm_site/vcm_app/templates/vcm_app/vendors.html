@@ -1,7 +1,7 @@
 {% if vendor_list %}
     <ul>
     {% for vendor in vendor_list %}
-        <li><a href="/vcm/vendors/{{ vendor.id }}/">{{ vendor.vendor_name }}</a></li>
+        <li><a href="{% url 'vcm_app:vendor_detail' vendor.id %}">{{ vendor.vendor_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
