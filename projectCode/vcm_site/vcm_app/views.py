@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 from .models import *
 
@@ -23,8 +23,14 @@ def vendors(request):
 
 
 def vendor_detail(request, vendor_id):
-    return HttpResponse("You're looking at vendor %s." % vendor_id)
 
+    try:
+        vendor = Vendor.objects.get(pk=vendor_id)
+
+    except Vendor.DoesNotExist:
+        raise Http404("Vendor does not exist")
+    #return HttpResponse("You're looking at vendor %s." % vendor_id)
+    return render(request, 'vcm_app/vendor_detail.html', {'vendor':vendor})
 
 def contracts(request):
     return HttpResponse("Hello, world. You're at the contracts page.") 
