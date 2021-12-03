@@ -14,9 +14,12 @@ def vendors(request):
     """consider changing this to an order by
         e.g.   latest_question_list = Question.objects.order_by('-pub_date')[:5]"""
     vendor_list = Vendor.objects.all() 
-    output = ', '.join([ v.vendor_name for v in vendor_list])
     
-    return HttpResponse(output)
+    context = {'vendor_list': vendor_list,}
+    
+    return render(request, 'vcm_app/vendors.html', context)
+
+
 
 
 def vendor_detail(request, vendor_id):

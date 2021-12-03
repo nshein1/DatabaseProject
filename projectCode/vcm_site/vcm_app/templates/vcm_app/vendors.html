@@ -1,0 +1,9 @@
+{% if vendor_list %}
+    <ul>
+    {% for vendor in vendor_list %}
+        <li><a href="/vcm/vendors/{{ vendor.id }}/">{{ vendor.vendor_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No vendors are available.</p>
+{% endif %}
