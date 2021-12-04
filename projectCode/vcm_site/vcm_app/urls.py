@@ -11,10 +11,14 @@ urlpatterns = [
 
 
     # ex: /vcm/vendors/
-    path('vendors/', views.vendors, name='vendors'),
+    #path('vendors/', views.vendors, name='vendors'),
+    path('vendors/', views.VendorsView.as_view(),name='vendors' ),
+
 
     #ex /vcm/vendors/1/
-    path('vendors/<int:vendor_id>/', views.vendor_detail, name='vendor_detail'),
+    #path('vendors/<int:vendor_id>/', views.vendor_detail, name='vendor_detail'),
+
+    path('vendors/<int:pk>', views.VendorDetailView.as_view(), name='vendor_detail'),
 
     # ex: /vcm/contracts/
     path('contracts/', views.contracts, name='contracts'),
