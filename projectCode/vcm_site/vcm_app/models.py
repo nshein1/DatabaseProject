@@ -29,6 +29,6 @@ class Contract(models.Model):
     """
 
 
-#toString
+    #toString
     def __str__(self):
         return self.contract_title

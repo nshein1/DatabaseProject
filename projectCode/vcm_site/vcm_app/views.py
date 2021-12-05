@@ -10,13 +10,16 @@ from .models import *
 def index(request):
     return HttpResponse("Hello, world. You're at the VCM index.")
 
+
+#no long using this version of the method
 def vendors(request):
     #return HttpResponse("Hello, world. You're at the vendors page.") 
 
     """consider changing this to an order by
         e.g.   latest_question_list = Question.objects.order_by('-pub_date')[:5]"""
-    vendor_list = Vendor.objects.all() #maybe make this a get_list_or_404()
-    
+    #vendor_list = Vendor.objects.all() #maybe make this a get_list_or_404()
+    vendor_list = Vendor.objects.order_by('vendor_name')
+
     context = {'vendor_list': vendor_list,}
     
     return render(request, 'vcm_app/vendors.html', context)
@@ -26,8 +29,8 @@ class VendorsView(generic.ListView):
     context_object_name = 'vendor_list'
 
     def get_queryset(self):
-        return Vendor.objects.all()
-
+        #return Vendor.objects.all()
+        return Vendor.objects.order_by('vendor_name')
 
 
 """
