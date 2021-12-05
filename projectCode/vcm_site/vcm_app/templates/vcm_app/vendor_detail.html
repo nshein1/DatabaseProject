@@ -1,8 +1,10 @@
 <h1>{{ vendor.vendor_name }}</h1>
 
 <h2>{{ vendor.vendor_email}}</h2>
-<!---<ul>;
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
+
+
+<h3> Contracts:</h3>
+
+{% for contract in vendor.contract_set.all %}
+   <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
 {% endfor %}
-</ul>---> 
