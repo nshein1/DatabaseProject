@@ -5,6 +5,11 @@
 
 <h3> Contracts:</h3>
 
-{% for contract in vendor.contract_set.all %}
-   <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
-{% endfor %}
+
+{% if vendor.contract_set.all %}
+    {% for contract in vendor.contract_set.all %}
+    <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
+    {% endfor %}
+{% else %}
+    <p>No contracts are available.</p>
+{% endif %}
