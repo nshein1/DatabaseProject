@@ -68,9 +68,9 @@ def contract_detail(request, contract_id):
    return HttpResponse("You're looking at contract %s." % contract_id)
     
 
-"""class ContractDetailView(generic.DetailView):
+class ContractDetailView(generic.DetailView):
     model = Contract
     template_name = 'vcm_app/contract_detail.html'
-"""
+
 
 

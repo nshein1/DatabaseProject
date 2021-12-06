@@ -22,6 +22,27 @@ class Contract(models.Model):
     contract_title = models.CharField(max_length=200)
     #votes = models.IntegerField(default=0)
 
+    """Contract Status stuff"""
+    CURRENT     = 'CR'
+    COMPLETED   = 'CP'
+    POTENTIAL   = 'PT'
+    CANCELED    = 'CN'
+    FUTURE      = 'FT'
+    CONTRACT_STATUS_CHOICES = [
+        (CURRENT, 'Current'),
+        (COMPLETED, 'Completed'),
+        (POTENTIAL, 'Potential'),
+        (CANCELED, 'Canceled'), 
+        (FUTURE, 'Future'),
+    ]
+
+    contract_status =  models.CharField(
+        max_length=2,
+        choices=CONTRACT_STATUS_CHOICES,
+        default=POTENTIAL,
+    )
+
+
     """ will need to use FileField
     see https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types
         https://www.geeksforgeeks.org/filefield-django-models/
