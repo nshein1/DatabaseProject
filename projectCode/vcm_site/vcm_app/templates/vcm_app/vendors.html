@@ -1,11 +1,27 @@
-<!----NEW STUFF HERE-->
+<!----SEARCH BAR STUFF-->
 
 <form action="{% url 'vcm_app:vendors' %}" method="get">
     <input name="search_term" type="text" placeholder="Search...">
+    
+    
+    <label for="contract_status">Contract Status:</label>
+    <select id="contract_status" name="contract_status">
+            <option value=>Select</option>
+            <option value="CR">Current</option>
+            <option value="CP">Completed</option>
+            <option value="PT">Potential</option>
+            <option value="CN">Canceled</option>
+            <option value="FT">Future</option>
+    </select>
+
+    <!--<input type="submit">Search</input> -->
+    <button type="submit" value="Submit">Search</button>
+
 </form>
-
-
-<!----END NEW STUFF-->
+<form action="{% url 'vcm_app:vendors' %}" method="get">
+    <button type="submit" value="Submit">Show All Results</button>
+</form>
+<!----SEARCH BAR STUFF-->
 
 {% if vendor_list %}
     <ul>

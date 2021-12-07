@@ -37,14 +37,14 @@ class VendorsView(generic.ListView):
 
         #filter by search terms
         if (search_term := self.request.GET.get("search_term")):
-            results.filter(           
+            results = results.filter(           
                             Q(vendor_name__icontains=search_term) |
                             Q(vendor_email__icontains=search_term) 
                         )
 
         #filter by contract_status
         if (contract_status := self.request.GET.get("contract_status")):
-            results.filter(contract__contract_status=contract_status)
+            results = results.filter(contract__contract_status=contract_status)
 
         #return filtered results ordered by vendor_name
         return results.order_by('vendor_name')
