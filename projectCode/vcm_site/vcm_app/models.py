@@ -65,4 +65,3 @@ class Contract(models.Model):
         https://www.geeksforgeeks.org/filefield-django-models/
 
     """
-""Testing
