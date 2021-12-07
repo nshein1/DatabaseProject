@@ -1,5 +1,4 @@
 <h1>{{ contract.contract_title }}</h1>
 
-<h2>Vendor: {{ contract.vendor.vendor_name}}</h2>
-
+<h2>Vendor: <a href="{% url 'vcm_app:vendor_detail' contract.vendor.id %}">{{ contract.vendor.vendor_name }}</a></h2>
 <h2>Current Status: {{ contract.get_contract_status_display }}</h2>
