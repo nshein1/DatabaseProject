@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.core.validators import MinValueValidator
+
 # Create your models here.
 
 class Vendor(models.Model):
@@ -53,3 +55,19 @@ class Contract(models.Model):
     #toString
     def __str__(self):
         return self.contract_title
+
+
+
+class Payment(models.Model):
+    payment_date = models.DateField()
+    payment_checkNumber = models.IntegerField(validators=[MinValueValidator(1)])
+    payment_checkAmount = models.DecimalField(max_digits=9,decimal_places=2)
+    payment_memo = models.CharField(max_length=500)
+
+    contract = models.ForeignKey(Contract, on_delete=models.PROTECT, default=1)
+
+
+
+    #this be a toString
+    def __str__(self):
+        return str(self.payment_checkNumber)
