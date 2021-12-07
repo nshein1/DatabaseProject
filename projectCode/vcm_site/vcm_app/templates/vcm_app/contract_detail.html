@@ -2,3 +2,20 @@
 
 <h2>Vendor: <a href="{% url 'vcm_app:vendor_detail' contract.vendor.id %}">{{ contract.vendor.vendor_name }}</a></h2>
 <h2>Current Status: {{ contract.get_contract_status_display }}</h2>
+
+
+
+
+
+
+
+<h3><u>Payments</u>:</h3>
+
+
+{% if contract.payment_set.all %}
+    {% for contract in vendor.contract_set.all %}
+   <!-- <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a> &emsp; {{contract.get_contract_status_display}}</li> -->
+    {% endfor %}
+{% else %}
+    <p>No contracts are available.</p>
+{% endif %}
