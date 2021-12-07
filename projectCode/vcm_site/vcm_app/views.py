@@ -33,18 +33,39 @@ class VendorsView(generic.ListView):
     context_object_name = 'vendor_list'
 
     def get_queryset(self):
-        #return Vendor.objects.all()
+        results = Vendor.objects.all()
 
-        if(search_term := self.request.GET.get("search_term")):
-            return Vendor.objects.filter( Q(vendor_name__icontains=search_term) |
-                                          Q(vendor_email__icontains=search_term)
+        #filter by search terms
+        if (search_term := self.request.GET.get("search_term")):
+            results.filter(           
+                            Q(vendor_name__icontains=search_term) |
+                            Q(vendor_email__icontains=search_term) 
+                        )
+
+        #filter by contract_status
+        if (contract_status := self.request.GET.get("contract_status")):
+            results.filter(contract__contract_status=contract_status)
+
+        #return filtered results ordered by vendor_name
+        return results.order_by('vendor_name')
+
+
+            
+        """
+        if((search_term := self.request.GET.get("search_term") )or (contract_status := self.request.GET.get("contract_status")) ):
+            return Vendor.objects.filter( 
+                
+                
+                                        (
+                                            Q(vendor_name__icontains=search_term) |
+                                            Q(vendor_email__icontains=search_term)
+                                        )
                                         ).order_by('vendor_name') #searches single field, vendor_name
-            """to search multiple fields, see https://testdriven.io/blog/django-search/
-                otherwise must add one line for every field"""
+            "
 
         else:
             return Vendor.objects.order_by('vendor_name') #alphebatize
-
+        """
 
 """
 def vendor_detail(request, vendor_id):
