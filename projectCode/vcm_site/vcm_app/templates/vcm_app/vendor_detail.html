@@ -3,6 +3,19 @@
 <h2>{{ vendor.vendor_email}}</h2>
 
 
+<h3><u>Types of Work Done</u>:</h3>
+{% if vendor.worktype_set.all %}
+    {% for work in vendor.worktype_set.all %}
+    <li>{{ work.work }}</li>
+    {% endfor %}
+{% else %}
+    <p>Types of work done are not available.</p>
+{% endif %}
+
+
+
+
+
 <h3><u>Contracts</u>:</h3>
 
 
