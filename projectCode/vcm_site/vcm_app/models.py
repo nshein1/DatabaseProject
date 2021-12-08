@@ -79,7 +79,7 @@ class Payment(models.Model):
 class WorkType(models.Model):
     work = models.CharField(max_length=100)
     vendors= models.ManyToManyField(Vendor, blank=True)
-
+    contracts= models.ManyToManyField(Contract, blank=True)
     class Meta:
         ordering = ['work']
 
