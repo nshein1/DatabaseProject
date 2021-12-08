@@ -1,14 +1,12 @@
 from django.db import models
 
-from django.core.validators import MinValueValidator
-
 # Create your models here.
 
 class Vendor(models.Model):
     vendor_name = models.CharField(max_length=200)
     #pub_date = models.DateTimeField('date published')
     vendor_email = models.EmailField(max_length=100) #THIS IS A PLACEHOLDER
-    #TypeofWorks = models.ManyToManyField(TypeofWork)
+    TypeofWorks = models.ManyToManyField(TypeofWork)
 
     #return this vendor's contracts
     def get_contracts(self):
@@ -24,7 +22,7 @@ class Contract(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT) #Does not allow vendor to be deleted
     contract_title = models.CharField(max_length=200)
     #votes = models.IntegerField(default=0)
-    #TypeofWorks = models.ManyToManyField(TypeofWork)
+    TypeofWorks = models.ManyToManyField(TypeofWork)
 
     """Contract Status stuff"""
     CURRENT     = 'CR'
@@ -53,31 +51,17 @@ class Contract(models.Model):
 
 
 
-class TypeofWork(models.Model):
-    work = models.CharField(max_length=50)
+    class TypeofWork(models.Model):
+        work = models.CharField(max_length=50)
 
-    class Meta:
-        ordering = ['work']
+        class Meta:
+            ordering = ['work']
 
-    def __str__(self):
-        return self.work
+        def __str__(self):
+            return self.work
 
-    #toString
-    def __str__(self):
-        return self.contract_title
+    """ will need to use FileField
+    see https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types
+        https://www.geeksforgeeks.org/filefield-django-models/
 
-
-
-class Payment(models.Model):
-    payment_date = models.DateField()
-    payment_checkNumber = models.IntegerField(validators=[MinValueValidator(1)])
-    payment_checkAmount = models.DecimalField(max_digits=9,decimal_places=2)
-    payment_memo = models.CharField(max_length=500)
-
-    contract = models.ForeignKey(Contract, on_delete=models.PROTECT, default=1)
-
-
-
-    #this be a toString
-    def __str__(self):
-        return str(self.payment_checkNumber)
+    """
