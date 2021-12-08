@@ -32,6 +32,18 @@ class VendorsView(generic.ListView):
     template_name = 'vcm_app/vendors.html'
     context_object_name = 'vendor_list'
 
+
+    """TRYING SOMEWITHING WEIRD HERE
+        Passing additional context data to the view"""
+    def get_context_data(self, **kwargs):
+        context = super(VendorsView, self).get_context_data(**kwargs)
+        context.update({
+            'worktype_list': WorkType.objects.all(),
+        })
+        return context
+
+    """END OF WEIRD"""
+
     def get_queryset(self):
         results = Vendor.objects.all()
 
@@ -46,8 +58,12 @@ class VendorsView(generic.ListView):
         if (contract_status := self.request.GET.get("contract_status")):
             results = results.filter(contract__contract_status=contract_status)
 
-        #return filtered results ordered by vendor_name
-        return results#.order_by('vendor_name')
+        #filter by worktype
+        if (worktype := self.request.GET.get("worktype")):
+            results = results.filter(worktype__work=worktype)
+
+        #return filtered results
+        return results
 
 
             

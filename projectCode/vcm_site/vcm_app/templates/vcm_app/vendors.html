@@ -3,7 +3,7 @@
 <form action="{% url 'vcm_app:vendors' %}" method="get">
     <input name="search_term" type="text" placeholder="Search...">
     
-    
+    <!--Search by Contract Status-->
     <label for="contract_status">Contract Status:</label>
     <select id="contract_status" name="contract_status">
             <option value=>Select</option>
@@ -14,6 +14,22 @@
             <option value="FT">Future</option>
     </select>
 
+    <!--Search by WorkType Status-->
+    <label for="worktype">Type of Work Done:</label>
+    <select id="worktype" name="worktype">
+            <option value=>Select</option>
+            {% if worktype_list %}
+                {% for worktype in worktype_list %}
+                    <li>{{worktype.work}}</li>
+                    <option value="{{worktype.work}}">{{worktype.work}}</option>
+                {% endfor %}
+            {% endif %}
+    </select>
+    <!--END Search by WorkType Status-->
+
+
+
+
     <!--<input type="submit">Search</input> -->
     <button type="submit" value="Submit">Search</button>
 
@@ -22,6 +38,7 @@
     <button type="submit" value="Submit">Show All Vendors</button>
 </form>
 <!----END OF SEARCH BAR STUFF-->
+
 
 {% if vendor_list %}
     <ul>
