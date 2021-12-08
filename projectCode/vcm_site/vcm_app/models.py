@@ -10,9 +10,16 @@ class Vendor(models.Model):
     vendor_email = models.EmailField(max_length=100)# default="test@test.com") #THIS IS A PLACEHOLDER
     #TypeofWorks = models.ManyToManyField(TypeofWork)
 
+    class Meta:
+        ordering =['vendor_name']
+
+
+
     #return this vendor's contracts
     def get_contracts(self):
         return self.contract_set.all()
+
+   
 
     #this be a toString
     def __str__(self):

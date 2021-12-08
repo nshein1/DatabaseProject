@@ -47,11 +47,11 @@ class VendorsView(generic.ListView):
             results = results.filter(contract__contract_status=contract_status)
 
         #return filtered results ordered by vendor_name
-        return results.order_by('vendor_name')
+        return results#.order_by('vendor_name')
 
 
             
-        """
+        """ first try at doing it. keep for posterity?
         if((search_term := self.request.GET.get("search_term") )or (contract_status := self.request.GET.get("contract_status")) ):
             return Vendor.objects.filter( 
                 
