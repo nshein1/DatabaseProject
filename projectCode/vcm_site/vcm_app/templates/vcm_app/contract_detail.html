@@ -30,19 +30,6 @@
 
 <h3><u>Payments</u>:</h3>
 
-<!--        THIS IS THE BASIC LOOP THING
-{% if contract.payment_set.all %}
-    {% for payment in contract.payment_set.all %}
-   
-   <li>{{ payment.payment_memo }}</li>
-    {% endfor %}
-{% else %}
-    <p>No payments are available.</p>
-{% endif %}
-
--->
-
-
 {% if contract.payment_set.all %}
     <table >
         <tr>
