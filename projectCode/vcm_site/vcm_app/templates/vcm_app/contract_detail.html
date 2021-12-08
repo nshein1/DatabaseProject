@@ -1,3 +1,13 @@
+<!--This is a css section to add a border to the payments table below-->
+
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+    </style>
+
+
+
 <h1>{{ contract.contract_title }}</h1>
 
 <h2>Vendor: <a href="{% url 'vcm_app:vendor_detail' contract.vendor.id %}">{{ contract.vendor.vendor_name }}</a></h2>
@@ -11,12 +21,38 @@
 
 <h3><u>Payments</u>:</h3>
 
-
+<!--        THIS IS THE BASIC LOOP THING
 {% if contract.payment_set.all %}
     {% for payment in contract.payment_set.all %}
-   <!-- <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a> &emsp; {{contract.get_contract_status_display}}</li> -->
+   
    <li>{{ payment.payment_memo }}</li>
     {% endfor %}
+{% else %}
+    <p>No payments are available.</p>
+{% endif %}
+
+-->
+
+
+{% if contract.payment_set.all %}
+    <table >
+        <tr>
+            <th>Check Date</th>
+            <th>Check Number</th>
+            <th>Check Amount</th>
+            <th>Check Memo</th>
+        </tr>
+
+        {% for payment in contract.payment_set.all %}
+        <tr>
+            <td align="center">{{ payment.payment_date }}</td>
+            <td align="center">{{ payment.payment_checkNumber }}</td>
+            <td align="center">{{ payment.payment_checkAmount }}</td>
+            <td align="center">{{ payment.payment_memo }}</td>
+        </tr>          
+        {% endfor %}
+    </table>
+
 {% else %}
     <p>No payments are available.</p>
 {% endif %}
