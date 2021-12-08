@@ -53,6 +53,9 @@ class Contract(models.Model):
         default=POTENTIAL,
     )
 
+
+    class Meta:
+        ordering =['contract_title']
     #toString
     def __str__(self):
         return self.contract_title
@@ -72,14 +75,15 @@ class Payment(models.Model):
     def __str__(self):
         return str(self.payment_memo)
 
-"""
-class TypeofWork(models.Model):
-    work = models.CharField(max_length=50)
+
+class WorkType(models.Model):
+    work = models.CharField(max_length=100)
+    vendors= models.ManyToManyField(Vendor, blank=True)
 
     class Meta:
         ordering = ['work']
 
     def __str__(self):
         return self.work
-"""
+
  
