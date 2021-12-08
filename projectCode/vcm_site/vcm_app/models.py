@@ -62,16 +62,9 @@ class TypeofWork(models.Model):
     def __str__(self):
         return self.work
 
-""" will need to use FileField
-see https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types
-    https://www.geeksforgeeks.org/filefield-django-models/
-
-"""
-
-
-#toString
-def __str__(self):
-    return self.contract_title
+    #toString
+    def __str__(self):
+        return self.contract_title
 
 
 
