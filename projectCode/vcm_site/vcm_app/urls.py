@@ -22,7 +22,7 @@ urlpatterns = [
    
 
     # ex: /vcm/contracts/
-    path('contracts/', views.contracts, name='contracts'),
+    path('contracts/', views.ContractsView.as_view(), name='contracts'),
 
     # ex /vcm/contracts/1/
     #path('contracts/<int:contract_id>/', views.contract_detail, name='contract_detail'),

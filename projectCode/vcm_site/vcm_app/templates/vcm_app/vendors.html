@@ -2,28 +2,28 @@
 
 <form action="{% url 'vcm_app:vendors' %}" method="get">
     <input name="search_term" type="text" placeholder="Search...">
-    
+
     <!--Search by Contract Status-->
     <label for="contract_status">Contract Status:</label>
     <select id="contract_status" name="contract_status">
-            <option value=>Select</option>
-            <option value="CR">Current</option>
-            <option value="CP">Completed</option>
-            <option value="PT">Potential</option>
-            <option value="CN">Canceled</option>
-            <option value="FT">Future</option>
+        <option value=>Select</option>
+        <option value="CR">Current</option>
+        <option value="CP">Completed</option>
+        <option value="PT">Potential</option>
+        <option value="CN">Canceled</option>
+        <option value="FT">Future</option>
     </select>
 
     <!--Search by WorkType Status-->
     <label for="worktype">Type of Work Done:</label>
     <select id="worktype" name="worktype">
-            <option value=>Select</option>
-            {% if worktype_list %}
-                {% for worktype in worktype_list %}
-                    <li>{{worktype.work}}</li>
-                    <option value="{{worktype.work}}">{{worktype.work}}</option>
-                {% endfor %}
-            {% endif %}
+        <option value=>Select</option>
+        {% if worktype_list %}
+        {% for worktype in worktype_list %}
+        <li>{{worktype.work}}</li>
+        <option value="{{worktype.work}}">{{worktype.work}}</option>
+        {% endfor %}
+        {% endif %}
     </select>
     <!--END Search by WorkType Status-->
 
@@ -41,11 +41,11 @@
 
 
 {% if vendor_list %}
-    <ul>
+<ul>
     {% for vendor in vendor_list %}
-        <li><a href="{% url 'vcm_app:vendor_detail' vendor.id %}">{{ vendor.vendor_name }}</a></li>
+    <li><a href="{% url 'vcm_app:vendor_detail' vendor.id %}">{{ vendor.vendor_name }}</a></li>
     {% endfor %}
-    </ul>
+</ul>
 {% else %}
-    <p>No vendors are available.</p>
+<p>No vendors are available.</p>
 {% endif %}

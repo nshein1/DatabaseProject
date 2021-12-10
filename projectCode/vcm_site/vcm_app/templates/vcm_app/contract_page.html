@@ -1,12 +1,45 @@
-<!DOCTYPE html>
+<form action="{% url 'vcm_app:contract_page' %}" method="get">
+    <input name="search_term" type="text" placeholder="Search....">
 
-<html>
+    <label for="contract_status">Contract Status:</label>
+    <select id="contract_status" name="contract_status">
+        <option value=>Select</option>
+        <option value="CR">Current</option>
+        <option value="CP">Completed</option>
+        <option value="PT">Potential</option>
+        <option value="CN">Canceled</option>
+        <option value="FT">Future</option>
+    </select>
 
-<body>
-    <ul>
-        {% for contract in contract_list %}
-    </ul>
 
-</body>
+    <label for="worktype">Type of Work Done:</label>
+    <select id="worktype" name="worktype">
+        <option value=>Select</option>
+        {% if worktype_list %}
+        {% for worktype in worktype_list %}
+        <li>{{worktype.work}}</li>
+        <option value="{{worktype.work}}">{{worktype.work}}</option>
+        {% endfor %}
+        {% endif %}
+    </select>
 
-</html>
+    <button type="submit" value="Submit">Search</button>
+
+</form>
+
+<form action="{% url 'vcm_app:contracts_page' %}" method="get">
+    <button type="submit" value="Submit">Show All Contracts</button>
+</form>
+
+
+
+
+{% if contract_list %}
+<ul>
+    {% for contract in contract_list %}
+    <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No contracts are available.</p>
+{% endif %}
