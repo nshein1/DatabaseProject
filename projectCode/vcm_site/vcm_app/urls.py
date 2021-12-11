@@ -27,6 +27,8 @@ urlpatterns = [
     # ex /vcm/contracts/1/
     #path('contracts/<int:contract_id>/', views.contract_detail, name='contract_detail'),
     path('contracts/<int:pk>/', views.ContractDetailView.as_view(), name='contract_detail'),
-    #path('contracts/<int:pk>', views.ContractDetailView.as_view(), name='contract_detail'),
+   
+    #path('contracts/<int:pk>/pdf', views.ContractDetailView.as_view(), name='contract_detail'),
+
 
 ]
