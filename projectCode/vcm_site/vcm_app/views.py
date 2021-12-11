@@ -11,7 +11,7 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the VCM index.")
+    return render(request, 'index.html')
 
 
 """no long using this version of the method
