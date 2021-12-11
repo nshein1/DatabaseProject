@@ -59,6 +59,8 @@ class Contract(models.Model):
     #toString
     def __str__(self):
         return self.contract_title
+    
+    contract_pdf = models.FileField(upload_to='contract_pdfs/', blank=True) #this will store files in MEDIA_ROOT/contract_pdfs
 
 
 class Payment(models.Model):
