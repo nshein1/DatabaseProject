@@ -92,10 +92,14 @@ def vendor_detail(request, vendor_id):
     """
 
 class ContractsView(generic.ListView):
-    template_name = 'vcm_app/contract_page.html'
+    template_name = 'vcm_app/contracts.html'
     context_object_name = 'contract_list'
 
-    def get_querySet(self):
+    def get_queryset(self):
+        #results = Vendor.objects.all()
+        results = Contract.objects.all()
+    
+        #filter by search terms
         if (search_term := self.request.GET.get("search_term")):
             results = results.filter(           
                             Q(vendor_name__icontains=search_term) |

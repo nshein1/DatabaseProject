@@ -1,4 +1,4 @@
-<form action="{% url 'vcm_app:contract_page' %}" method="get">
+<form action="{% url 'vcm_app:contracts' %}" method="get">
     <input name="search_term" type="text" placeholder="Search....">
 
     <label for="contract_status">Contract Status:</label>
@@ -27,7 +27,7 @@
 
 </form>
 
-<form action="{% url 'vcm_app:contracts_page' %}" method="get">
+<form action="{% url 'vcm_app:contracts' %}" method="get">
     <button type="submit" value="Submit">Show All Contracts</button>
 </form>
 
@@ -35,9 +35,10 @@
 
 
 {% if contract_list %}
+
 <ul>
     {% for contract in contract_list %}
-    <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_name }}</a></li>
+    <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
     {% endfor %}
 </ul>
 {% else %}
