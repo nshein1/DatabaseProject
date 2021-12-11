@@ -30,9 +30,7 @@ class Vendor(models.Model):
 class Contract(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT) #Does not allow vendor to be deleted
     contract_title = models.CharField(max_length=200)
-    #votes = models.IntegerField(default=0)
-    #TypeofWorks = models.ManyToManyField(TypeofWork)
-
+    
     """Contract Status stuff"""
     CURRENT     = 'CR'
     COMPLETED   = 'CP'
@@ -52,14 +50,18 @@ class Contract(models.Model):
         choices=CONTRACT_STATUS_CHOICES,
         default=POTENTIAL,
     )
-
-
     class Meta:
-        ordering =['contract_title']
+            ordering =['contract_title']
+    
     #toString
     def __str__(self):
         return self.contract_title
 
+
+
+    contract_pdf = models.FileField(upload_to='contract_pdfs/', blank=True) #this will store files in MEDIA_ROOT/contract_pdfs
+
+    
 
 class Payment(models.Model):
     payment_date = models.DateField()
@@ -86,4 +88,9 @@ class WorkType(models.Model):
     def __str__(self):
         return self.work
 
- 
+
+
+
+class FileUpload(models.Model):
+    uploadName = models.CharField(max_length=100)
+    file = models.FileField(upload_to='testFiles\\')

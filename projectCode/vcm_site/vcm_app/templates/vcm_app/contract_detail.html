@@ -43,7 +43,7 @@
         <tr>
             <td align="center">{{ payment.payment_date }}</td>
             <td align="center">{{ payment.payment_checkNumber }}</td>
-            <td align="center">{{ payment.payment_checkAmount }}</td>
+            <td align="center">${{ payment.payment_checkAmount }}</td>
             <td align="center">{{ payment.payment_memo }}</td>
         </tr>          
         {% endfor %}
@@ -52,3 +52,11 @@
 {% else %}
     <p>No payments are available.</p>
 {% endif %}
+
+
+
+
+<!--THIS IS WHERE THE FUN BEGINS-->
+
+{{ contract.contract_pdf.url }}
+<a href="{{ contract.contract_pdf.url }}">maybe this works maybe this doesnt</a>

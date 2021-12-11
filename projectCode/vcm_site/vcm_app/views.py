@@ -95,8 +95,7 @@ class ContractsView(generic.ListView):
     template_name = 'vcm_app/contracts.html'
     context_object_name = 'contract_list'
 
-    """TRYING SOMEWITHING WEIRD HERE
-        Passing additional context data to the view"""
+    """Passing additional context data to the view"""
     def get_context_data(self, **kwargs):
         context = super(ContractsView, self).get_context_data(**kwargs)
         context.update({
@@ -104,16 +103,9 @@ class ContractsView(generic.ListView):
         })
         return context
 
-    """END OF WEIRD"""
-
-
-
-
-
-
+  
 
     def get_queryset(self):
-        #results = Vendor.objects.all()
         results = Contract.objects.all()
     
         #filter by search terms

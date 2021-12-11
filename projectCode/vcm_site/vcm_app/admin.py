@@ -9,4 +9,7 @@ admin.site.register(WorkType)
 # Register your models here.
 
 
+admin.site.register(FileUpload)
+
+
 
