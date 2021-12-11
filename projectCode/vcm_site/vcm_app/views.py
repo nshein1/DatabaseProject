@@ -95,6 +95,23 @@ class ContractsView(generic.ListView):
     template_name = 'vcm_app/contracts.html'
     context_object_name = 'contract_list'
 
+    """TRYING SOMEWITHING WEIRD HERE
+        Passing additional context data to the view"""
+    def get_context_data(self, **kwargs):
+        context = super(ContractsView, self).get_context_data(**kwargs)
+        context.update({
+            'worktype_list': WorkType.objects.all(),
+        })
+        return context
+
+    """END OF WEIRD"""
+
+
+
+
+
+
+
     def get_queryset(self):
         #results = Vendor.objects.all()
         results = Contract.objects.all()
@@ -102,13 +119,13 @@ class ContractsView(generic.ListView):
         #filter by search terms
         if (search_term := self.request.GET.get("search_term")):
             results = results.filter(           
-                            Q(vendor_name__icontains=search_term) |
-                            Q(vendor_email__icontains=search_term) 
+                            Q(contract_title__icontains=search_term) #|
+                            #Q(vendor_email__icontains=search_term) 
                         )
 
         #filter by contract_status
         if (contract_status := self.request.GET.get("contract_status")):
-            results = results.filter(contract__contract_status=contract_status)
+            results = results.filter(contract_status=contract_status)
 
         #filter by worktype
         if (worktype := self.request.GET.get("worktype")):
