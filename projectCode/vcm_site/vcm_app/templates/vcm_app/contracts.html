@@ -1,46 +1,142 @@
-<form action="{% url 'vcm_app:contracts' %}" method="get">
-    <input name="search_term" type="text" placeholder="Search....">
-
-    <label for="contract_status">Contract Status:</label>
-    <select id="contract_status" name="contract_status">
-        <option value=>Select</option>
-        <option value="CR">Current</option>
-        <option value="CP">Completed</option>
-        <option value="PT">Potential</option>
-        <option value="CN">Canceled</option>
-        <option value="FT">Future</option>
-    </select>
 
 
-    <label for="worktype">Type of Work Done:</label>
-    <select id="worktype" name="worktype">
-        <option value=>Select</option>
-        {% if worktype_list %}
-        {% for worktype in worktype_list %}
-        <li>{{worktype.work}}</li>
-        <option value="{{worktype.work}}">{{worktype.work}}</option>
-        {% endfor %}
-        {% endif %}
-    </select>
+<!DOCTYPE html>
 
-    <button type="submit" value="Submit">Search</button>
+<html lang="en-us" dir="ltr">
+<head>
+<title>Contract Search</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
 
-</form>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
 
-<form action="{% url 'vcm_app:contracts' %}" method="get">
-    <button type="submit" value="Submit">Show All Contracts</button>
-</form>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
 
 
 
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
 
-{% if contract_list %}
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
 
-<ul>
-    {% for contract in contract_list %}
-    <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No contracts are available.</p>
-{% endif %}
+<body class=" dashboard"
+  data-admin-utc-offset="-18000">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Contracts</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+
+                    <a href="">View site</a> 
+        </div>
+        
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    <div class="main" id="main">
+      
+        
+      
+      <div class="content">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colMS">
+          
+          <h1> 
+                <a id="site-name"><a href="/vcm/">
+                    <button style="background-color:rgb(0, 0, 0); margin:5px;">Home</a>    
+
+                    <a id="site-name"><a href="/vcm/vendors/">
+                        <button style="background-color:rgb(0, 0, 0); margin:5px;">Vendors</a>    
+                        <a id="site-name"><a href="/admin/">
+                            <button style="background-color:rgb(0, 0, 0); margin:5px;">Admin Portal</a> 
+
+
+            </h1>
+            <form action="{% url 'vcm_app:contracts' %}" method="get">
+                <input name="search_term" type="text" placeholder="Search....">
+            
+                <br><br>
+                <label for="contract_status">Contract Status:</label>
+                <select id="contract_status" name="contract_status">
+                    <option value=>Select</option>
+                    <option value="CR">Current</option>
+                    <option value="CP">Completed</option>
+                    <option value="PT">Potential</option>
+                    <option value="CN">Canceled</option>
+                    <option value="FT">Future</option>
+                </select>
+            
+            <br><br>
+                <label for="worktype">Type of Work Done:</label>
+                <select id="worktype" name="worktype">
+                    <option value=>Select</option>
+                    {% if worktype_list %}
+                    {% for worktype in worktype_list %}
+                    <li>{{worktype.work}}</li>
+                    <option value="{{worktype.work}}">{{worktype.work}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            
+                <br><br>
+                <button type="submit" value="Submit">Search</button>
+            
+            </form>
+            <br>
+            <form action="{% url 'vcm_app:contracts' %}" method="get">
+                <button type="submit" value="Submit">Show All Contracts</button>
+            </form>
+            
+            
+            
+            
+            {% if contract_list %}
+            
+            <ul>
+                {% for contract in contract_list %}
+                <li><a href="{% url 'vcm_app:contract_detail' contract.id %}">{{ contract.contract_title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No contracts are available.</p>
+            {% endif %}
+          
+          
+
+
+          
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
+
+
+
