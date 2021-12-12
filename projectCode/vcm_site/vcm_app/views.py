@@ -51,7 +51,10 @@ class VendorsView(generic.ListView):
         if (search_term := self.request.GET.get("search_term")):
             results = results.filter(           
                             Q(vendor_name__icontains=search_term) |
-                            Q(vendor_email__icontains=search_term) 
+                            Q(vendor_email__icontains=search_term)| 
+                            Q(vendor_phone__icontains=search_term)|
+                            Q(vendor_notes__icontains=search_term)|
+                            Q(vendor_poc__icontains=search_term)
                         )
 
         #filter by contract_status
