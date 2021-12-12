@@ -70,7 +70,36 @@
 
             </h1>
             <h2>Email: {{ vendor.vendor_email}}</h2>
+                     
+                
+            {% if vendor.vendor_phone %}
+                <h2>Phone: {{ vendor.vendor_phone}}</h2> 
+            {% endif %}
             
+            
+            {% if vendor.vendor_website %}
+                <h2><a href="{{ vendor.vendor_website}}">Vendor Website</a></h2> 
+            {% endif %}
+            
+
+
+            <h2>Vendor Identified By: {{ vendor.get_vendor_referral_display }}</h2>
+
+
+            {% if vendor.vendor_poc %}
+                <h2><u>Point of Contact Information</u></h2> 
+                <p>{{ vendor.vendor_poc }}</p>
+            {% endif %}
+           
+
+            {% if vendor.vendor_notes %}
+                <h2><u>Additional Notes</u></h2> 
+                <p>{{ vendor.vendor_notes }}</p>
+            {% endif %}
+           
+
+
+
             <h2><u>Types of Work Done</u>:</h2>
 {% if vendor.worktype_set.all %}
     {% for work in vendor.worktype_set.all %}

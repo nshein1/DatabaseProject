@@ -6,9 +6,32 @@ from django.core.validators import MinValueValidator
 
 class Vendor(models.Model):
     vendor_name = models.CharField(max_length=200)
-    #pub_date = models.DateTimeField('date published')
     vendor_email = models.EmailField(max_length=100)# default="test@test.com") #THIS IS A PLACEHOLDER
-    #TypeofWorks = models.ManyToManyField(TypeofWork)
+    
+
+    #NEW FIELDS START HERE
+    vendor_phone = models.CharField(max_length=10, blank=True)
+    vendor_website = models.URLField(blank=True)
+    vendor_notes = models.TextField(blank=True)
+    vendor_poc = models.TextField(blank=True)
+
+    """Identification Method Stuff"""
+    BIDDING     = 'B'
+    REFERRAL   = 'R'
+    ADVERTISEMENT   = 'A'
+    VENDOR_REFERRAL_CHOICES = [
+        (BIDDING, 'Bidding'),
+        (REFERRAL, 'Referral'),
+        (ADVERTISEMENT, 'Advertisement'),
+    ]
+
+    vendor_referral =  models.CharField(
+        max_length=1,
+        choices=VENDOR_REFERRAL_CHOICES,
+        default=ADVERTISEMENT,
+    )
+
+    #NEW FIELDS END HERE
 
     class Meta:
         ordering =['vendor_name']
