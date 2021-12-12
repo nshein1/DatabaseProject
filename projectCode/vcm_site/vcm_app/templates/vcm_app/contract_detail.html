@@ -1,26 +1,86 @@
-<!--This is a css section to add a border to the payments table below-->
 
-<style>
-    table, th, td {
-      border:1px solid black;
-    }
-    </style>
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Contract Search</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
 
 
 
-<h1>{{ contract.contract_title }}</h1>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
 
-<h2>Vendor: <a href="{% url 'vcm_app:vendor_detail' contract.vendor.id %}">{{ contract.vendor.vendor_name }}</a></h2>
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" dashboard"
+  data-admin-utc-offset="-18000">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
+<h1> {{ contract.contract_title }}</h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+
+                    <a href="">View site</a> 
+        </div>
+        
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    <div class="main" id="main">
+      
+        
+      
+      <div class="content">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colMS">
+          
+          <h1> 
+                <a id="site-name"><a href="/vcm/">
+                    <button style="background-color:rgb(0, 0, 0); margin:5px;">Home</a>    
+
+                    <a id="site-name"><a href="/vcm/contracts/">
+                        <button style="background-color:rgb(0, 0, 0); margin:5px;">Contracts</a>    
+
+            </h1>
+            
+            <h2>Vendor: <a href="{% url 'vcm_app:vendor_detail' contract.vendor.id %}">{{ contract.vendor.vendor_name }}</a></h2>
 <h2>Current Status: {{ contract.get_contract_status_display }}</h2>
 
-<h3>Type of Work Done: </h3>
+<h2><u>Type of Work Done</u>:</h2>
 
 {% if contract.worktype_set.all %}
-    {% for work in contract.worktype_set.all %}
-    <li>{{ work.work }}</li>
-    {% endfor %}
+  {% for work in contract.worktype_set.all %}
+  <li>{{ work.work }}</li>
+  {% endfor %}
 {% else %}
-    <p>Types of work done are not available.</p>
+  <p>Type of work done is not available.</p>
 {% endif %}
 
 
@@ -28,27 +88,46 @@
 
 
 
-<h3><u>Payments</u>:</h3>
+<h2><u>Payments</u>:</h2>
 
 {% if contract.payment_set.all %}
-    <table >
-        <tr>
-            <th>Check Date</th>
-            <th>Check Number</th>
-            <th>Check Amount</th>
-            <th>Check Memo</th>
-        </tr>
+  <table >
+      <tr>
+          <th>Check Date</th>
+          <th>Check Number</th>
+          <th>Check Amount</th>
+          <th>Check Memo</th>
+      </tr>
 
-        {% for payment in contract.payment_set.all %}
-        <tr>
-            <td align="center">{{ payment.payment_date }}</td>
-            <td align="center">{{ payment.payment_checkNumber }}</td>
-            <td align="center">{{ payment.payment_checkAmount }}</td>
-            <td align="center">{{ payment.payment_memo }}</td>
-        </tr>          
-        {% endfor %}
-    </table>
+      {% for payment in contract.payment_set.all %}
+      <tr>
+          <td align="center">{{ payment.payment_date }}</td>
+          <td align="center">{{ payment.payment_checkNumber }}</td>
+          <td align="center">{{ payment.payment_checkAmount }}</td>
+          <td align="center">{{ payment.payment_memo }}</td>
+      </tr>          
+      {% endfor %}
+  </table>
 
 {% else %}
-    <p>No payments are available.</p>
+  <p>No payments are available.</p>
 {% endif %}
+          
+          
+
+
+          
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
+
+
+
