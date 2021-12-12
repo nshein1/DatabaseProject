@@ -130,3 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #REALLY GOTTA CHANGE THIS
 #MEDIA_ROOT='C:\Users\jgarr\OneDrive\@Undergrad\@Now\@Project\codebase\412Project\site_media\\'
 #MEDIA_ROOT='C:\TEST\\'
+MEDIA_ROOT=''

@@ -18,10 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('vcm/', include('vcm_app.urls')),
+    #path('vcm/', include('vcm_app.urls')),
 
     #uncomment this line to make vcm app the default path. otherwise everything is server:port/vcm/
-    #path('', include('vcm_app.urls')), 
+    path('', include('vcm_app.urls')), 
 ]
 
 
