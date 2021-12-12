@@ -109,12 +109,6 @@ class ContractsView(generic.ListView):
 
     """END OF WEIRD"""
 
-
-
-
-
-
-
     def get_queryset(self):
         #results = Vendor.objects.all()
         results = Contract.objects.all()
@@ -122,8 +116,8 @@ class ContractsView(generic.ListView):
         #filter by search terms
         if (search_term := self.request.GET.get("search_term")):
             results = results.filter(           
-                            Q(contract_title__icontains=search_term) #|
-                            #Q(vendor_email__icontains=search_term) 
+                            Q(contract_title__icontains=search_term) |
+                            Q(contract_notes__icontains=search_term) 
                         )
 
         #filter by contract_status
@@ -158,7 +152,7 @@ class ContractDetailView(generic.DetailView):
     template_name = 'vcm_app/contract_detail.html'
 
 
-
+#this is what makes the pdf downloads work. edit at your own risk
 def pdf_view(request):
     filename= request.path.replace('/', '', 1)
     #print(filename)

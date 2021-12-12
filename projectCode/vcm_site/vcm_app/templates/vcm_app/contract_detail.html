@@ -84,7 +84,10 @@
 {% endif %}
 
 
-
+{% if contract.contract_notes %}
+    <h2><u>Additional Notes</u></h2> 
+    <p>{{ contract.contract_notes }}</p>
+{% endif %}
 
 
 

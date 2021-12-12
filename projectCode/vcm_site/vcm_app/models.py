@@ -53,8 +53,7 @@ class Vendor(models.Model):
 class Contract(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT) #Does not allow vendor to be deleted
     contract_title = models.CharField(max_length=200)
-    #votes = models.IntegerField(default=0)
-    #TypeofWorks = models.ManyToManyField(TypeofWork)
+    contract_notes = models.TextField(blank=True)
 
     """Contract Status stuff"""
     CURRENT     = 'CR'
