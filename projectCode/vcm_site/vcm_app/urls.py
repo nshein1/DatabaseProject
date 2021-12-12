@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -28,5 +28,7 @@ urlpatterns = [
     #path('contracts/<int:contract_id>/', views.contract_detail, name='contract_detail'),
     path('contracts/<int:pk>/', views.ContractDetailView.as_view(), name='contract_detail'),
     #path('contracts/<int:pk>', views.ContractDetailView.as_view(), name='contract_detail'),
+
+    re_path(r'^contract_pdfs/(?:.*)', views.pdf_view, name='pdf_view'),
 
 ]

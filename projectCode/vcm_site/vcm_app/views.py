@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, FileResponse
 from django.urls import reverse
 from django.views import generic
 
@@ -153,6 +153,16 @@ def contract_detail(request, contract_id):
 class ContractDetailView(generic.DetailView):
     model = Contract
     template_name = 'vcm_app/contract_detail.html'
+
+
+
+def pdf_view(request):
+    filename= request.path.replace('/', '', 1)
+    #print(filename)
+    try:
+        return FileResponse(open(filename, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
 
 
 

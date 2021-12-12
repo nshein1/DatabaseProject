@@ -114,8 +114,11 @@
 {% endif %}
           
           
-
-
+{% if contract.payment_set.all %}
+  <h2><a href="/{{ contract.contract_pdf }}" download>Download Contract PDF</a><h2></h2>
+{% else %}
+ <h2> <p>No PDF available.</p> </h2>
+{% endif %}
           
 
           <br class="clear">
