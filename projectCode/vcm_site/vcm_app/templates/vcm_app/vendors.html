@@ -1,8 +1,85 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Vendor Search</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
+
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" dashboard"
+  data-admin-utc-offset="-18000">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Vendors</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+
+                    <a href="">View site</a> 
+        </div>
+        
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    <div class="main" id="main">
+      
+        
+      
+      <div class="content">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colMS">
+          
+          <h1> 
+                <a id="site-name"><a href="/vcm/">
+                    <button style="background-color:rgb(0, 0, 0); margin:5px;">Home</a>    
+
+                    <a id="site-name"><a href="/vcm/contracts/">
+                        <button style="background-color:rgb(0, 0, 0); margin:5px;">Contracts</a>    
+                        <a id="site-name"><a href="/admin/">
+                            <button style="background-color:rgb(0, 0, 0); margin:5px;">Admin Portal</a> 
+
+
+            </h1>
 <!----SEARCH BAR STUFF-->
 
 <form action="{% url 'vcm_app:vendors' %}" method="get">
     <input name="search_term" type="text" placeholder="Search...">
 
+    <br><br>
     <!--Search by Contract Status-->
     <label for="contract_status">Contract Status:</label>
     <select id="contract_status" name="contract_status">
@@ -14,6 +91,7 @@
         <option value="FT">Future</option>
     </select>
 
+    <br><br>
     <!--Search by WorkType Status-->
     <label for="worktype">Type of Work Done:</label>
     <select id="worktype" name="worktype">
@@ -29,11 +107,12 @@
 
 
 
-
+<br><br>
     <!--<input type="submit">Search</input> -->
     <button type="submit" value="Submit">Search</button>
 
 </form>
+<br>
 <form action="{% url 'vcm_app:vendors' %}" method="get">
     <button type="submit" value="Submit">Show All Vendors</button>
 </form>
@@ -49,3 +128,23 @@
 {% else %}
 <p>No vendors are available.</p>
 {% endif %}
+            
+          
+          
+
+
+          
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
+
+
+
