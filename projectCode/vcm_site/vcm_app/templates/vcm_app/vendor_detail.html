@@ -1,16 +1,77 @@
-<style>
-    table, th, td {
-      border:1px solid black;
-    }
-    </style>
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Vendor</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
 
 
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" dashboard"
+  data-admin-utc-offset="-18000">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
 <h1>{{ vendor.vendor_name }}</h1>
 
-<h2>{{ vendor.vendor_email}}</h2>
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
 
+                    <a href="">View site</a> 
+        </div>
+        
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    <div class="main" id="main">
+      
+        
+      
+      <div class="content">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colMS">
+          
+          <h1> 
+                <a id="site-name"><a href="/vcm/">
+                    <button style="background-color:rgb(0, 0, 0); margin:5px;">Home</a>    
 
-<h3><u>Types of Work Done</u>:</h3>
+                    <a id="site-name"><a href="/vcm/vendors/">
+                        <button style="background-color:rgb(0, 0, 0); margin:5px;">Vendors</a>    
+
+            </h1>
+            <h2>Email: {{ vendor.vendor_email}}</h2>
+            
+            <h2><u>Types of Work Done</u>:</h2>
 {% if vendor.worktype_set.all %}
     {% for work in vendor.worktype_set.all %}
     <li>{{ work.work }}</li>
@@ -23,7 +84,7 @@
 
 
 
-<h3><u>Contracts</u>:</h3>
+<h2><u>Contracts</u>:</h2>
 
 
 {% if vendor.contract_set.all %}
@@ -45,6 +106,17 @@
 {% else %}
     <p>No contracts are available.</p>
 {% endif %}
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
 
 
 
