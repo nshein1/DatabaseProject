@@ -110,4 +110,110 @@ class WorkType(models.Model):
     def __str__(self):
         return self.work
 
- 
+ #beginning of 457 Database models
+class Building(models.Model):
+    Address = models.CharField(max_length=30)
+    Owner_Company = models.CharField(max_length=20)
+    Zip_Code = models.CharField(max_length=10)
+    PO_Box = models.IntegerField
+    Building_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+
+class Unit(models.Model):
+    Unit_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+    Unit_Number = models.IntegerField
+    Unit_Floor = models.IntegerField
+    Unit_Type = models.CharField(max_length=20)
+    Num_of_Bedrooms = models.IntegerField
+    Num_of_Bathrooms = models.IntegerField
+    Balcony = models.BooleanField
+    Availability = models.BooleanField
+    Building_ID = models.ForeignKey(Building, on_delete=models.PROTECT)
+
+    def get_Availability(self):
+        return self.Availability
+
+    class Meta:
+        ordering = ['Unit_Number']
+
+class Person(models.Model):
+    Person_Name = models.CharField(max_length=22)
+    SSN = models.IntegerField(max_length=10, unique=True)
+    Permanent_Address = models.CharField(max_length=30)
+    ID = models.CharField(max_length=7, primary_key=True, unique=True)
+
+    #seems redundant, but for argument ordering it isn't
+    Tenant = 'Tenant'
+    Staff = 'Staff'
+
+    Person_Types = [
+        (Tenant, 'Tenant'),
+        (Staff, 'Staff')
+    ]
+
+    Person_Type = models.CharField(max_length=6, choices=Person_Types, default=Tenant)
+
+    def is_Tenant(self):
+        return self.Person_Type in {self.Tenant}
+
+    class Meta:
+        ordering = ['Person_Name']
+
+class Lease(models.Model):
+    Direct_or_Guarantor = models.CharField(max_length=1) #D will mean Direct, G will mean Guarantor; figure out ChoiceField later
+    Lease_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+    Renter_ID = models.CharField(max_length=7)
+    Rent_Amount = models.DecimalField(max_digits=7, decimal_places=2)
+
+    Application = 'Lease Application'
+    Active_Lease = 'Active Lease'
+
+    Lease_Types = [
+        (Application, 'Application'),
+        (Active_Lease, 'Active Lease')
+    ]
+
+    Lease_Type = models.CharField(max_length=20, choices=Lease_Types, default=Active_Lease)
+
+    def is_Active(self):
+        return self.Lease_Type in {self.Active_Lease}
+
+class Parking(models.Model):
+    Permit_Number = models.IntegerField
+    License_Plate = models.CharField(max_length=8) #weird fractional plates
+    Govt_ID = models.ForeignKey(Person, on_delete=models.CASCADE)
+    Allowed_Floor = models.IntegerField
+    Parking_Permit_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+
+class Maintenance_Request(models.Model):
+    Issue = models.CharField(max_length=30)
+    Work_Order_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+    Unit_ID = models.ForeignKey(Unit, on_delete=models.CASCADE)
+
+class Payment_Ledger(models.Model):
+    Unit_ID = models.ForeignKey(Unit, on_delete=models.CASCADE, primary_key=True)
+    Lease_ID = models.ForeignKey(Lease, on_delete=models.CASCADE, primary_key=True)
+    Renter_ID = models.ForeignKey(Person, on_delete=models.CASCADE, primary_key=True)
+    Parking_Permit_ID = models.ForeignKey(Parking, on_delete=models.CASCADE)
+    Work_Order_ID = models.ForeignKey(Maintenance_Request, on_delete=models.CASCADE)
+
+class Inspection(models.Model):
+    Inspection_Date_Time = models.DateTimeField
+    Unit_ID = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    Building_ID = models.ForeignKey(Building, on_delete=models.CASCADE)
+    Inspection_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+    Reason = models.TextField(blank=True, max_length=255)
+    Performed_By = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+class Rent_Payment(models.Model):
+    Payment_Deadline = models.DateTimeField
+    Payment_Date = models.DateTimeField
+    Amount_Paid = models.DecimalField(max_digits=7, decimal_places=2)
+    Payment_ID = models.CharField(max_length=7, primary_key=True, unique=True)
+    Unit_ID = models.ForeignKey(Unit, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['Payment_Deadline']
+
+class Amenities(models.Model):
+    Amenities_Type = models.CharField(max_length=20)
+    Amenities_Location = models.CharField(max_length=20)
