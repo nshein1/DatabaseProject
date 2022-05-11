@@ -7,6 +7,8 @@ from django.views import generic
 
 from django.db.models import Q
 
+from projectCode.vcm_site.vcm_app.models import Building
+
 from .models import *
 
 # Create your views here.
@@ -161,6 +163,73 @@ def pdf_view(request):
     except FileNotFoundError:
         raise Http404()
 
+
+
 #Start of 457 Database Views
 
 
+def index(request):
+    return render(request, 'index.html')
+
+class BuildingsView(generic.ListView):
+    template_name = 'vcm_app/buildings.html'
+    context_object_name = 'buildings_list'
+
+
+    """TRYING SOMEWITHING WEIRD HERE
+        Passing additional context data to the view"""
+    def get_context_data(self, **kwargs):
+        context = super(BuildingsView, self).get_context_data(**kwargs)
+        context.update({
+            'worktype_list': WorkType.objects.all(),
+        })
+        return context
+
+    """END OF WEIRD"""
+
+    def get_queryset(self):
+        results = Buildings.objects.all()
+
+        #filter by search terms
+        if (search_term := self.request.GET.get("search_term")):
+            results = results.filter(           
+                            Q(building_name__icontains=search_term) |
+                            Q(building_phone__icontains=search_term)
+                        )
+
+        #filter by contract_status
+        if (contract_status := self.request.GET.get("contract_status")):
+            results = results.filter(contract__contract_status=contract_status)
+
+        #filter by worktype
+        if (worktype := self.request.GET.get("worktype")):
+            results = results.filter(worktype__work=worktype)
+
+        #return filtered results
+        return results
+    
+class UnitsView(generic.ListView):
+    template_name = 'vcm_app/units.html'
+    context_object_name = 'units_list'
+    
+    
+    
+    def get_queryset(self):
+        results = units.objects.all()
+
+        #filter by search terms
+        if (search_term := self.request.GET.get("search_term")):
+            results = results.filter(           
+                            Q(unit_num__icontains=search_term)
+                        )
+
+        #filter by contract_status
+        if (contract_status := self.request.GET.get("contract_status")):
+            results = results.filter(contract__contract_status=contract_status)
+
+        #filter by worktype
+        if (worktype := self.request.GET.get("worktype")):
+            results = results.filter(worktype__work=worktype)
+
+        #return filtered results
+        return results
