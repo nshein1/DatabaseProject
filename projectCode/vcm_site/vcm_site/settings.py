@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['http://ec2-18-219-110-111.us-east-2.compute.amazonaws.com/']
 # Application definition
 
 INSTALLED_APPS = [
+    'vcm_app.apps.VcmAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
